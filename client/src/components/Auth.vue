@@ -105,6 +105,8 @@ async function register() {
       throw new Error(error.message);
     }
 
+    await login();
+
   } catch (e) {
     error.value = e.message;
   }

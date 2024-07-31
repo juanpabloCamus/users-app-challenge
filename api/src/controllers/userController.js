@@ -15,13 +15,9 @@ export default class UserController {
   static async updateUser(req, res, next) {
     try {
       const { id } = req.params;
-      const updatedUser = validateNewUserEntry(req.body);
+      const { name, email } = req.body;
 
-      // Hash Password
-      const hashedPassword = await hashPassword(updatedUser.password);
-      updatedUser.password = hashedPassword;
-
-      const user = await UserService.updateUser(id, updatedUser);
+      const user = await UserService.updateUser(id, name, email);
       return res.status(200).send(user);
     } catch (error) {
       next(error);

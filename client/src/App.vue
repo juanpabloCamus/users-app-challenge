@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import 'primeicons/primeicons.css';
+</script>
 
 <template>
   <RouterView />

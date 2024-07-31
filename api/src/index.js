@@ -17,7 +17,7 @@ server.use(express.json());
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use(cors({
-  origin: 'http://localhost:5176', 
+  origin: 'http://localhost:5177', 
   credentials: true 
 }));
 

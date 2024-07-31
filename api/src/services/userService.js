@@ -39,16 +39,17 @@ export default class UserService {
   /**
    * Get user by id.
    * @param id - User id.
-   * @param updatedUser - The updated user entry.
+   * @param name - User name.
+   * @param email - User email.
    * @returns A promise that resolves to the found user.
    * @throws Error if there is an error with the query.
    */
-  static async updateUser(id, updatedUser) {
+  static async updateUser(id, name, email) {
       const user = await User.findByPk(id);
       if (!user) {
         throw new ServerError('User not found', 404);
       }
-      await user.update(updatedUser);
+      await user.update({ name, email });
       return user;
 
   }

@@ -9,9 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "js-cookie": "^3.0.5",
+    "primeicons": "^7.0.0",
     "vue": "^3.4.31",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.13",
+    "vue3-snackbar": "^2.3.2"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
