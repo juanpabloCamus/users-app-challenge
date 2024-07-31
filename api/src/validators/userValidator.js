@@ -8,22 +8,16 @@ const validateEmail = (email) => {
 // TODO: Make password validator for later
 
 export const validateNewUserEntry = (body) => {
-  const { name, email, password } = body;
+  let { name, email, password } = body;
+
+  name = name.toString();
+  email = email.toString();
+  password = password.toString();
 
   //Check if the fields are empty
   if (!name || !email || !password) {
     throw new ServerError('Missing required information', 400);
   }
-
-  // TODO: check
-  //Check if the fields are strings
-  // if (
-  //   typeof name !== 'string' ||
-  //   typeof email !== 'string' ||
-  //   typeof password !== 'string'
-  // ) {
-  //   throw new ServerError('Invalid input', 400);
-  // }
 
   //Check if the email is valid
   if (validateEmail(email)) {
@@ -43,7 +37,10 @@ export const validateNewUserEntry = (body) => {
 };
 
 export const validateLoginEntry = (body) => {
-  const { email, password } = body;
+  let { email, password } = body;
+
+  email = email.toString();
+  password = password.toString();
 
   //Check if the email is valid
   if (validateEmail(email)) {
@@ -52,3 +49,4 @@ export const validateLoginEntry = (body) => {
 
   return { email, password };
 };
+

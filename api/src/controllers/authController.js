@@ -9,6 +9,7 @@ import {
   hashPassword,
 } from '../utils/authUtils.js';
 import UserService from '../services/userService.js';
+import { ServerError } from '../middlewares/errorHandler.js';
 
 export default class AuthController {
   static async login(req, res, next) {
@@ -71,6 +72,12 @@ export default class AuthController {
 
       // Hash Password
       const hashedPassword = await hashPassword(newUser.password);
+
+      const userExists = await UserService.findUserByEmail(newUser.email);
+
+      if (userExists) {
+        throw new ServerError('This email is already registered', 400);
+      }
 
       // Create the user
       const createdUser = await UserService.createUser({

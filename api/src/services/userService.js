@@ -10,13 +10,9 @@ export default class UserService {
    * @throws Error if there is an error with the query.
    */
   static async findUserByEmail(email) {
-    try {
       const user = await User.findOne({ where: { email } });
       return user;
-    } catch (error) {
-      console.error(error);
-      throw new ServerError('Internal Server Error');
-    }
+
   }
   
   /**
@@ -26,12 +22,49 @@ export default class UserService {
    * @throws Error if there is an error with the insert with query.
    */
   static async createUser(newUser) {
-    try {
       const createdUser = await User.create(newUser);
       return createdUser;
-    } catch (error) {
-      console.error(error);
-      throw new ServerError('Internal Server Error');
-    }
+
+  }
+
+  /**
+   * Get all users.
+   * @returns A promise that resolves to all users.
+   * @throws Error if there is an error with the query.
+   */
+  static async getUsers() {
+      return await User.findAll({ attributes: { exclude: ['password'] } });
+  }
+
+  /**
+   * Get user by id.
+   * @param id - User id.
+   * @param updatedUser - The updated user entry.
+   * @returns A promise that resolves to the found user.
+   * @throws Error if there is an error with the query.
+   */
+  static async updateUser(id, updatedUser) {
+      const user = await User.findByPk(id);
+      if (!user) {
+        throw new ServerError('User not found', 404);
+      }
+      await user.update(updatedUser);
+      return user;
+
+  }
+
+  /**
+   * Delete user by id.
+   * @param id - User id.
+   * @returns A promise that resolves to the deleted user.
+   * @throws Error if there is an error with the query.
+   */
+  static async deleteUser(id) {
+      const user = await User.findByPk(id);
+      if (!user) {
+        throw new ServerError('User not found', 404);
+      }
+      await user.destroy();
+      return user;
   }
 }

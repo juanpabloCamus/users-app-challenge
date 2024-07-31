@@ -6,8 +6,9 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { authRouter } from './routes/authRouter.js';
 import { auth } from './middlewares/authMiddleware.js';
 import sequelize from './database/database.js';
+import userRouter from './routes/userRouter.js';
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 const server = express();
 
@@ -17,6 +18,7 @@ server.use(morgan('dev'));
 
 // Routes
 server.use('/auth', authRouter);
+server.use('/users', userRouter);
 
 // Protected Routes
 server.use(auth);
