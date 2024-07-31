@@ -1,1 +1,1 @@
-export const API_PORT = 3003;
+export const API_PORT = 3000;

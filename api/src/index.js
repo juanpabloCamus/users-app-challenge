@@ -9,7 +9,7 @@ import { auth } from './middlewares/authMiddleware.js';
 import sequelize from './database/database.js';
 import userRouter from './routes/userRouter.js';
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3000;
 const ORIGIN = process.env.ORIGIN || 'http://localhost:4173';
 
 const server = express();
