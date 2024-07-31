@@ -35,7 +35,7 @@
 
 <script setup>
 import { ref } from 'vue';
-
+import { useRouter } from 'vue-router'
 import { API_PORT } from '../config.js';
 
 const email = ref('');
@@ -43,6 +43,8 @@ const password = ref('');
 const name = ref('');
 const loginMode = ref(true);
 const error = ref("");
+
+const router = useRouter();
 
 function changeMode() {
   loginMode.value = !loginMode.value;
@@ -68,12 +70,15 @@ async function login() {
         email: email.value,
         password: password.value,
       }),
+      credentials: 'include',
     });
 
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.message);
     }
+
+    router.push('/');
 
   } catch (e) {
     error.value = e.message;

@@ -1,6 +1,7 @@
 import morgan from 'morgan';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 import { errorHandler } from './middlewares/errorHandler.js';
 import { authRouter } from './routes/authRouter.js';
@@ -15,21 +16,22 @@ const server = express();
 server.use(express.json());
 server.use(cookieParser());
 server.use(morgan('dev'));
+server.use(cors({
+  origin: 'http://localhost:5176', 
+  credentials: true 
+}));
 
-// Enable CORS
-server.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+
 
 // Routes
 server.use('/auth', authRouter);
-server.use('/users', userRouter);
 
 // Protected Routes
 server.use(auth);
+server.get('/session', (req, res) => {
+  res.send({ message: 'Session is valid' });
+});
+server.use('/users', userRouter);
 
 server.use(errorHandler);
 
