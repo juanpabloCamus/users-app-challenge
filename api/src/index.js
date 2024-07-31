@@ -8,13 +8,21 @@ import { auth } from './middlewares/authMiddleware.js';
 import sequelize from './database/database.js';
 import userRouter from './routes/userRouter.js';
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3003;
 
 const server = express();
 
 server.use(express.json());
 server.use(cookieParser());
 server.use(morgan('dev'));
+
+// Enable CORS
+server.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 
 // Routes
 server.use('/auth', authRouter);
