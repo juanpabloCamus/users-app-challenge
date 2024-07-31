@@ -5,7 +5,7 @@ const validateEmail = (email) => {
   return !emailRegex.test(email);
 };
 
-// TODO: Make password validator for later
+// I did not a password validator due testing purposes
 
 export const validateNewUserEntry = (body) => {
   let { name, email, password } = body;
@@ -50,3 +50,20 @@ export const validateLoginEntry = (body) => {
   return { email, password };
 };
 
+export const validateUpdateUserEntry = (body) => {
+  let { name, email } = body;
+
+  name = name.toString();
+  email = email.toString();
+
+  if (name.length > 32) {
+    throw new ServerError('Name is too long', 400);
+  }
+
+  //Check if the email is valid
+  if (validateEmail(email)) {
+    throw new ServerError('Invalid email', 400);
+  }
+  
+  return { name, email };
+};

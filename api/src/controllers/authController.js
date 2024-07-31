@@ -90,4 +90,14 @@ export default class AuthController {
       next(error);
     }
   }
+
+  static async logout(req, res) {
+    try {
+      res.clearCookie('accessToken');
+      res.clearCookie('refreshToken');
+      res.status(200).send({ message: 'Logged out successfully' });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

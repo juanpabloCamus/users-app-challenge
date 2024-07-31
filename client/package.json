@@ -11,8 +11,7 @@
   "dependencies": {
     "primeicons": "^7.0.0",
     "vue": "^3.4.31",
-    "vue-router": "^4.0.13",
-    "vue3-snackbar": "^2.3.2"
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",

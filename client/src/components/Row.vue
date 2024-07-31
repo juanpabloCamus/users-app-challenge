@@ -31,6 +31,10 @@ const props = defineProps({
     type: Function,
     required: true,
   },
+  logout: {
+    type: Function,
+    required: true,
+  },
 });
 
 const name = ref(props.user.name);
@@ -56,6 +60,11 @@ async function handleDeleteUser() {
     if (response.ok) {
       console.log('User deleted');
       props.getUsers();
+
+      if (props.user.id === JSON.parse(localStorage.getItem('user')).id) {
+        localStorage.removeItem('user');
+        props.logout();
+      }
     } else {
       throw new Error('Failed to delete user');
     }
@@ -82,13 +91,13 @@ async function handleUpdateUser() {
     );
     if (response.ok) {
       console.log('User updated');
-      props.getUsers();
     } else {
       throw new Error('Failed to update user');
     }
   } catch (error) {
     alert(error.message);
   } finally {
+    props.getUsers();
     toggleEdit();
   }
 }

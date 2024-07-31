@@ -46,6 +46,7 @@ const error = ref("");
 
 const router = useRouter();
 
+// Toggle between login and register mode
 function changeMode() {
   loginMode.value = !loginMode.value;
 }
@@ -59,6 +60,7 @@ function handleSubmit(event) {
     register();
   }
 }
+
 async function login() {
   try {
     const response = await fetch(`http://localhost:${API_PORT}/auth/login`, {
@@ -77,6 +79,10 @@ async function login() {
       const error = await response.json();
       throw new Error(error.message);
     }
+
+    const loggedUser =await response.json();
+
+    localStorage.setItem('user', JSON.stringify(loggedUser));
 
     router.push('/');
 
@@ -113,7 +119,7 @@ async function register() {
 }
 </script>
 
-<style scoped>
+<style >
 .form-container {
   display: flex;
   flex-direction: column;
@@ -123,6 +129,8 @@ async function register() {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  align-self: center;
+
 }
 
 h1 {

@@ -1,6 +1,5 @@
 import UserService from '../services/userService.js';
-import { validateNewUserEntry } from '../validators/userValidator.js';
-import { hashPassword } from '../utils/authUtils.js';
+import { validateUpdateUserEntry } from '../validators/userValidator.js';
 
 export default class UserController {
   static async getUsers(req, res, next) {
@@ -15,7 +14,7 @@ export default class UserController {
   static async updateUser(req, res, next) {
     try {
       const { id } = req.params;
-      const { name, email } = req.body;
+      const { name, email } = validateUpdateUserEntry(req.body);
 
       const user = await UserService.updateUser(id, name, email);
       return res.status(200).send(user);

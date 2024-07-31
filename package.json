@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "workspaces": [
+    "api",
+    "client"
+  ],
+  "scripts": {
+    "start:api": "npm --workspace api start",
+    "start:api:dev": "npm --workspace api run start:dev",
+    "client:build": "npm --workspace client run build",
+    "client:dev": "npm --workspace client run dev",
+    "client:start": "npm --workspace client run preview"
+  }
+}

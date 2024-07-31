@@ -12,7 +12,7 @@ export function errorHandler(err, _req, res, _next) {
   console.error(err);
 
   if (err instanceof ServerError) {
-    return res.status(err.status).send(err.message);
+    return res.status(err.status).send({ message: err.message });
   }
 
   res.status(500).send('Internal server error');

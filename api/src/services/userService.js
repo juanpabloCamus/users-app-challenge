@@ -37,7 +37,7 @@ export default class UserService {
   }
 
   /**
-   * Get user by id.
+   * Update user by id.
    * @param id - User id.
    * @param name - User name.
    * @param email - User email.

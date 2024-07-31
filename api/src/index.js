@@ -10,6 +10,7 @@ import sequelize from './database/database.js';
 import userRouter from './routes/userRouter.js';
 
 const PORT = process.env.PORT || 3003;
+const ORIGIN = process.env.ORIGIN || 'http://localhost:4173';
 
 const server = express();
 
@@ -17,11 +18,9 @@ server.use(express.json());
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use(cors({
-  origin: 'http://localhost:5177', 
+  origin: ORIGIN, 
   credentials: true 
 }));
-
-
 
 // Routes
 server.use('/auth', authRouter);
